@@ -7,7 +7,8 @@ import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 
 class ChatService extends GetxService {
-  final wsUrl = 'http://10.0.2.2:8080/ws'; // for emulator
+  // final wsUrl = 'http://10.0.2.2:8080/ws'; // for emulator
+  final wsUrl = 'https://clientserver-production.up.railway.app/ws';
   late StompClient client;
   String? username;
 
@@ -15,8 +16,7 @@ class ChatService extends GetxService {
   void onInit() {
     super.onInit();
     client = StompClient(
-        config: StompConfig.sockJS(
-            url: 'http://10.0.2.2:8080/ws', onConnect: onConnectCallback));
+        config: StompConfig.sockJS(url: wsUrl, onConnect: onConnectCallback));
 
     client.activate();
   }
