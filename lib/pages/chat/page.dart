@@ -1,3 +1,4 @@
+import 'package:call_away/model/chat_message.dart';
 import 'package:call_away/pages/chat/controller.dart';
 import 'package:call_away/widgets/chat_message.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +12,16 @@ class ChatPage extends GetView<ChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[300],
-        title: const Text('iChat'), 
-        actions: [
-        IconButton(
-          icon: const Icon(Icons.exit_to_app),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/home');
-          },
-        ),
-      ]),
+          backgroundColor: Colors.deepPurple[300],
+          title: const Text('iChat'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.exit_to_app),
+              onPressed: () {
+                controller.exit();
+              },
+            ),
+          ]),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -32,15 +33,22 @@ class ChatPage extends GetView<ChatController> {
                 //physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final message = controller.messages[index];
-                  return ChatMessageWidget(
-                      sender: message.sender,
-                      content: message.content,
-                      isMe: message.sender == 'User');
+                  if (message.type == MessageType.chat) {
+                    return ChatMessageWidget(
+                        sender: message.sender,
+                        content: message.content!,
+                        isMe:
+                            message.sender == controller.chatService.username);
+                  } else {
+                    return Center(
+                      child: Text(
+                          "${message.sender} ${message.type == MessageType.join ? "joined" : "left"}"),
+                    );
+                  }
                 },
               ),
             ),
           ),
-
           Container(
             padding: const EdgeInsets.all(10),
             color: Colors.white,

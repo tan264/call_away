@@ -3,6 +3,7 @@ import 'package:call_away/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:get/get.dart';
 
 import 'controller.dart';
 
@@ -49,10 +50,9 @@ class HomePage extends GetView<HomeController> {
 // }
 
 // class _HomePageState extends State<HomePage> {
-  late String? username;
+  String username = "";
   bool loggingin = false;
   final _usernameController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -116,24 +116,57 @@ class HomePage extends GetView<HomeController> {
                     tag: 'joinButton',
                     child: CustomButton(
                       text: 'JOIN',
-                      onPressed: () async {
-                        Navigator.pushNamed(context, '/chat');
-                        controller.join(_usernameController.text);
+                      onPressed: () {
+                        // Navigator.pushNamed(context, '/chat');
+                        // controller.join(_usernameController.text);
+                        if (username.isEmpty) {
+                          Get.closeAllSnackbars();
+                          Get.snackbar("Username field cannot be empty",
+                              "Please enter a username",
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.errorContainer,
+                              colorText: Theme.of(context)
+                                  .colorScheme
+                                  .onErrorContainer);
+                        } else {
+                          controller.join(username);
+                        }
                       },
                     ),
                   ),
-                  const SizedBox(
-                      height: 100
-                  ),
-                  const Hero(
-                      tag: 'footer',
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
+                  const SizedBox(height: 100),
+                  Hero(
+                    tag: 'footer',
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Help us!"),
+                              content: const Text(
+                                  "One of our team members has lost his computer. Can you donate to help him buy a new computer?"),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text("NO")),
+                                const TextButton(
+                                    onPressed: null, child: Text("YES")),
+                              ],
+                            ),
+                          );
+                        },
+                        child: const Text(
                           'Made with ♥ by Group 1',
                           style: TextStyle(fontFamily: 'Poppins'),
                         ),
-                      ))
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

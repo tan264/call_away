@@ -6,6 +6,7 @@ class HomeController extends GetxController {
 
   void join(String username) {
     chatService.joinChat(username);
-    Get.toNamed("/chat");
+    Get.closeAllSnackbars();
+    Get.offAllNamed("/chat");
   }
 }
