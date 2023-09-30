@@ -1,4 +1,4 @@
-import 'package:Callaway/pages/home/controller.dart';
+import 'package:call_away/pages/home/controller.dart';
 import 'package:get/get.dart';
 
 class HomeBinding extends Bindings {

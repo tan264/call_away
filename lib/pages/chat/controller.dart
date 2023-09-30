@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:Callaway/model/chat_message.dart';
-import 'package:Callaway/service/chat_service.dart';
+import 'package:call_away/model/chat_message.dart';
+import 'package:call_away/service/chat_service.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {

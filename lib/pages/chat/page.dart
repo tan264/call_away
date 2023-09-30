@@ -1,5 +1,5 @@
-import 'package:Callaway/pages/chat/controller.dart';
-import 'package:Callaway/widgets/chat_message.dart';
+import 'package:call_away/pages/chat/controller.dart';
+import 'package:call_away/widgets/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

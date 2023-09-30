@@ -1,5 +1,5 @@
-import 'package:Callaway/widgets/custom_button.dart';
-import 'package:Callaway/widgets/custom_text_field.dart';
+import 'package:call_away/widgets/custom_button.dart';
+import 'package:call_away/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
