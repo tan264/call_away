@@ -10,17 +10,28 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
+    printInfo(info: "Chat controller init");
     super.onInit();
 
-    chatService.client.subscribe(
+    chatService.client!.subscribe(
         destination: '/topic/public',
         callback: (frame) {
-          messages.add(ChatMessage.fromJson(jsonDecode(frame.body!)));
-          print(frame.body);
+          if (frame.body != null) {
+            printInfo(info: frame.body!);
+          } else {
+            printInfo(info: "frame.body is null");
+          }
+          ChatMessage message = ChatMessage.fromJson(jsonDecode(frame.body!));
+          messages.add(message);
         });
   }
 
   void sendMessage(String message) {
     chatService.send(message);
+  }
+
+  void exit() {
+    chatService.closeConnection();
+    Get.offNamed("/home");
   }
 }

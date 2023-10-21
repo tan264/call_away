@@ -1,7 +1,7 @@
 class ChatMessage {
   final MessageType type;
   final String sender;
-  final String content;
+  final String? content;
 
   ChatMessage(
       {required this.type, required this.sender, required this.content});
@@ -9,7 +9,7 @@ class ChatMessage {
   ChatMessage.joinMessage(String username)
       : type = MessageType.join,
         sender = username,
-        content = "";
+        content = null;
 
   Map<String, dynamic> toJson() => {
         'type': type.name,
